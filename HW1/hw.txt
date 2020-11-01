@@ -1,0 +1,44 @@
+HW1 Assessment
+
+Problem 1
+
+subset - This problem was done by checking if each element of the 
+first list (a) is in the second list (b) using List.mem function.
+If found an element that is not in b return false otherwise return
+true
+
+Problem 2
+
+equal_sets - If list a is a subset of list b and if list b is
+a subset of list a then lists a and b are same set.
+
+Problem 3
+
+set_union - This was done by adding elements that are in list a which are not in list b. Recursively call the function and skip if an element is in b. If not add to b
+
+Probelm 4
+
+set_intersection - Do the similar thing as set_union except this 
+time recursively call the function and add to returned list if an element is in b. If not skip to next element. 
+
+Problem 5
+
+set_diff - Do the same thing as set_intersection except this time recursively call the function and add to returned list if an element is not in b. If not skip to next element. 
+
+Problem 6
+
+computed_fixed_point - If given parameters satisfy fixed point, return x (ex : f(x) = x, return x). If not satisfied, recursively call the function with the same predicate and parameters except that parameters are f and f(x). 
+
+Problem 7
+
+filter_reachable - For this problem, I created few helper functions (cleaned, nts, get_all_nonterminals, list_compare).
+
+cleaned function accepts list of symbols and outputs all nonterminal symbol in a list. (This function was given from TA)
+
+nts function accepts a grammar list and outputs all nonterminal symbols in a list using cleaned function.
+
+get_all_nonterminals function accepts three parameters : prev, next, and a grammar list. prev represents previously processed nonterminals and next represents the nonterminals that need to be processed. It starts with the starting symbol and from there process down the tree of grammar. Recursively call the function untill it hits the nonterminals that only contain terminal symbol. This will return list of nonterminals that can be reached from the start symbol.
+
+Finally, filter_reachable function will call get_all_nonterminals function and return the result in a pair with starting sysmbol.
+
+

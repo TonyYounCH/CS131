@@ -1,0 +1,56 @@
+Assignment 7
+Assessment
+
+I made my make_parser in terms of make_matcher since they share similiar concepts 
+of looking for fragment elements inside the given grammar. Although I did not
+directly call make_matcher from make_parser, make_parser just adds some more 
+features of keeping track of where you are at while traversing through the 
+grammar and make it tree-like data structure. My first helper function of 
+make_parser (the one that is very similar to make_matcher helper function) reads 
+through grammar and returns list of whatever rules that were used to make given 
+fragment. This is done by using two mutually recursive functions. Whenever a 
+nonterminal symbol is found (this includes the starting symbol), you first call 
+parser function that handles the set of rules that grammar production function 
+returns from the given nonterminal symbol. These rules (alternative list) are 
+examined one by one by calling next fuction parse_rule. parse_rule checks for 
+each element of provided rule and decides how to handle each symbol. If it is 
+nonterminal, it would call parser function again to get alternative list of 
+the symbol again and handles rest rules by recursively calling parse_rule with 
+them.  If it is nonterminal, match the symbol with first element of current 
+fragment and move on. These functions return whatever acceptor function returns
+(option).
+
+Now that I have list of rules from parser function, I traverse through this 
+list using traverse_tree and traverse_rule functions. These are also mutually 
+recursive functions where they change the given list into tree-like data 
+structure. It is necessary to create tree with type ('nonterminal, 'terminal) 
+parse_tree. So traverse_tree function is in charge of created 'nonterminal part 
+of Node and traverse_rule takes care of ('nonterminal, 'terminal) parse_tree list 
+part of Node and Leaf. This is done by calling traverse_rule from traverse_tree 
+whenever there exists a rule. I pass current rule and rest of rules that have yet 
+to be visited to traverse_rule function. It checks for each element in rule and 
+if it is nonterminal, it calls traverse_tree for that symbol to get Node part of 
+the symbol and call traverse_rule again with tail of the rule and newly created 
+list of rules. The result of traverse_tree will be put aside with the result of 
+traverse_rule so that it can have right order and depth. If it is terminal, it 
+will only call traverse_rule for tail of the current rule and put Leaf symbol in 
+front of the result. 
+
+There are some weakness on my code. First, code itself is not quite scalable in a 
+sense that it can only handle things that were specified on spec (Nothing more 
+and nothing less). 
+
+Also, for make_matcher function, it can emit buggy output for certain fragments. 
+If fragment goes through shorter rule first, and if acceptor accepts it 
+(accept_all), it will not match optimal case. 
+
+Another destined bug is the famous infinite loop. make_parser will throw a 
+
+Stack overflow during evaluation (looping recursion?).
+
+error if grammar is not set properly. If I specify a grammar with nonterminal 
+symbol that has a rule containing itself in front, the function will suffer 
+infinite loop like DFS. Another way to reproduce this bug is to make two 
+nonterminal symbols have rules containing each other. This would cause the 
+function to go back and forth and suffer stack overflow. 
+
