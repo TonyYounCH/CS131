@@ -6,7 +6,14 @@ class AcmeSafeState implements State {
 
     public int size() { return value.length(); }
 
-    public AtomicLongArray current() { return value; }
+    public long[] current() { 
+
+		long[] long_val = new long[value.length()];
+		for(int i = 0; i < value.length(); i++) {
+			long_val[i] = (long)value.get(i);
+		}
+		return long_val;
+    }
 
     public synchronized void swap(int i, int j) {
 		value.addAndGet(i, -1);
