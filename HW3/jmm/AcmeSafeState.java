@@ -17,6 +17,6 @@ class AcmeSafeState implements State {
 
     public synchronized void swap(int i, int j) {
 		value.getAndAdd(i, -1);
-		value.getAndAdd(j, -1);
+		value.getAndAdd(j, 1);
     }
 }
