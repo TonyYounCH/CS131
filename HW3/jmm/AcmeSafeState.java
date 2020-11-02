@@ -15,7 +15,7 @@ class AcmeSafeState implements State {
 		return long_val;
     }
 
-    public synchronized void swap(int i, int j) {
+    public void swap(int i, int j) {
 		value.getAndAdd(i, -1);
 		value.getAndAdd(j, 1);
     }
