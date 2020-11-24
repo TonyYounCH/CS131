@@ -1,0 +1,26 @@
+Problem 2:
+Using statistics, speedup predicate returned the ratio of 
+test_tower/test_plain_tower. 
+
+speedup(A).                                                                    
+A = 6.2832369942196529 ? ;
+no
+
+Problem 3:
+There are many ambiguous contraints that produce more than one matrix.
+
+ambiguous(4, C, T1, T2).
+
+...
+
+C = counts([4,2,2,1],[1,2,2,4],[3,2,2,1],[1,2,2,3])
+T1 = [[1,3,2,4],[2,1,4,3],[3,4,1,2],[4,2,3,1]]
+T2 = [[1,3,2,4],[2,4,1,3],[3,1,4,2],[4,2,3,1]] ? 
+
+C = counts([2,2,3,1],[2,2,1,3],[3,1,2,2],[1,3,2,2])
+T1 = [[1,3,2,4],[4,2,3,1],[2,4,1,3],[3,1,4,2]]
+T2 = [[2,3,1,4],[4,1,3,2],[1,4,2,3],[3,2,4,1]] ? 
+
+...
+
+
