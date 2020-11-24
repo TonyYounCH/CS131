@@ -174,7 +174,7 @@
         [dict2 (create_dict (cadr y) (cadr x) dict)])
     (let ([new_dict1 (cons (change_with_dict1 dict1 (cadr x)) (list (change_with_dict1 dict1 (caddr x))))]
           [new_dict2 (cons (change_with_dict2 dict2 (cadr y)) (list (change_with_dict2 dict2 (caddr y))))])
-      (if (equal? (car x) (car y)) (list (cons (car x) new_dict1) (cons (car y) new_dict2)) (list (cons 'λ new_dict1) (cons 'λ new_dict2)))
+      (if (equal? (car x) (car y)) (list (cons (car x) new_dict1) (cons (car y) new_dict2)) (list (cons LAMBDA new_dict1) (cons LAMBDA new_dict2)))
      ))
   )
 
@@ -193,7 +193,8 @@
   )
 #|
 (define z '(lambda (lambda) (+ lambda if (f lambda))))
-(define k '(lambda (if) (+ if if (f λ))))
+(define k '(lambda (if) (+ if if (f
+))))
 (bound_lambda_fun z k)
 (define dict_x (bound_lambda_fun z k))
 |#
@@ -272,7 +273,7 @@
 ; You need to cover all grammars including:
 ;     constant literals, variables, procedure calls, quote, lambda, if
 (define test-expr-x
-  `(cons 12 ((lambda (a) '(+ a 1)) (λ (x y) (+ (if x a) y)))))
+  `(cons 12 ((lambda (a) '(+ a 1)) (LAMBDA (x y) (+ (if x a) y)))))
 
 (define test-expr-y
   `(cons 11 ((lambda (n) (+ n 2)) (lambda (x k) (+ (+ x k) n)))))
@@ -289,7 +290,7 @@
 
 
 
-#|
+
 
 (equal? (expr-compare 12 12) 12)
 (equal? (expr-compare 12 20)  '(if % 12 20))
@@ -347,4 +348,3 @@
         a (λ (a!b) (if % a!b a)))))
      (lambda (b!a a!b) (b!a a!b))))
 
-|#
